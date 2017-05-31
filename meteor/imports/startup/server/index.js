@@ -1,1 +1,1 @@
-// empty meanwhile
+import '../../api/accounts/server/publications.js';

@@ -7,6 +7,9 @@ import App from '../../ui/layouts/App.jsx';
 import NotFound from '../../ui/pages/NotFound.jsx';
 import Index from '../../ui/pages/Index.jsx';
 
+import Login from '../../ui/pages/Login.jsx';
+import Signup from '../../ui/pages/Signup.jsx';
+
 
 class Routes extends Component {
   constructor(props) {
@@ -18,6 +21,8 @@ class Routes extends Component {
       <Router history={ browserHistory }>
         <Route path="/" component={ App }>
           <IndexRoute name="index" component={ Index }/>
+          <Route name="login" path="/login" component={ Login }/>
+          <Route name="signup" path="/signup" component={ Signup }/>
           <Route path="*" component={ NotFound }/>
         </Route>
       </Router>
