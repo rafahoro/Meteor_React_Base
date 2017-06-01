@@ -10,6 +10,8 @@ import Index from '../../ui/pages/Index.jsx';
 import Login from '../../ui/pages/Login.jsx';
 import Signup from '../../ui/pages/Signup.jsx';
 
+import Users from '../../ui/pages/Users/Users.jsx';
+
 
 class Routes extends Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class Routes extends Component {
         <Route path="/" component={ App }>
           <IndexRoute name="index" component={ Index }/>
           <Route name="login" path="/login" component={ Login }/>
+          <Route name="users" path="/users" component={ Users }/>
           <Route name="signup" path="/signup" component={ Signup }/>
           <Route path="*" component={ NotFound }/>
         </Route>

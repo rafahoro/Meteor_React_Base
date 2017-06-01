@@ -31,6 +31,9 @@ class NavBar extends Component {
             <li>
               <Link to="/">Home</Link>
             </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
             {!Meteor.userId() && (
               <li>
                 <Link to="/login">Log In</Link>
