@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Roles } from 'meteor/alanning:roles';
+
+import ROLES from '../../../api/accounts/roles.js';
+
 
 class EditUser extends Component {
   constructor(props) {
@@ -12,6 +16,7 @@ class EditUser extends Component {
       email: '',
       firstName: '',
       lastName: '',
+      roles: [],
       id: ''
     };
   }
@@ -25,13 +30,24 @@ class EditUser extends Component {
       email: user.emails[0].address,
       firstName: user.profile.name.first,
       lastName: user.profile.name.last,
+      roles: Roles.getRolesForUser(user._id),
       id: user._id
     });
   }
 
   handleChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    let value = target.type === 'checkbox' ? target.checked : target.value;
+    if (target.type === 'select-multiple') {
+      value = [];
+      const options = event.target.options;
+      for (let i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          value.push(options[i].value);
+        }
+      }
+      value = _.compact(value);
+    }
     const name = target.id;
     this.setState({
       [name]: value
@@ -44,7 +60,8 @@ class EditUser extends Component {
       id: this.state.id,
       email: this.state.email,
       firstName: this.state.firstName,
-      lastName: this.state.lastName
+      lastName: this.state.lastName,
+      roles: this.state.roles
     };
     Meteor.call('updateUser', user, (error) =>{
       if (error) {
@@ -76,6 +93,20 @@ class EditUser extends Component {
             <input id="email" type="email" placeholder="user@example.com"
                    onChange={this.handleChange} value={this.state.email}/>
           </fieldset>
+
+          <fieldset >
+            <label htmlFor="roles">Roles</label>
+            <select onChange={this.handleChange} id="roles" multiple value={this.state.roles}>
+              <option value="">NO ROLES</option>
+              {
+                _.map(ROLES, (rol, i) =>
+                  <option key={i} value={rol} >{rol}</option>
+                )
+              }
+            </select>
+          </fieldset>
+
+
           <input type="submit" value="submit"/>
         </form>
       </div>

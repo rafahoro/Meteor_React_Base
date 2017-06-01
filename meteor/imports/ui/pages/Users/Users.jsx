@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { Roles } from 'meteor/alanning:roles';
 
 import Loading from '../../components/Loading.jsx';
 
@@ -17,17 +18,18 @@ class Users extends Component {
   }
 
   renderBody() {
-    const entries = this.props.users;
+    const users = this.props.users;
     return (
       <tbody>
       {
-        entries.map((user, idx) =>
+        users.map((user, idx) =>
           <tr key={idx}>
             <td>{idx + 1} </td>
             <td>
               <Link to={{ pathname: `/users/${user._id}` }}>{user.profile.name.first}</Link>
             </td>
             <td>{user.emails[0].address}</td>
+            <td>{Roles.getRolesForUser(user._id)}</td>
           </tr>
         )
       }
@@ -55,6 +57,7 @@ class Users extends Component {
               <th>#</th>
               <th>Name</th>
               <th>email</th>
+              <th>Roles</th>
             </tr>
             </thead>
             {this.renderBody()}

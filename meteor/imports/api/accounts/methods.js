@@ -1,7 +1,7 @@
 import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-
+import { Roles } from 'meteor/alanning:roles';
 
 function createNewUser(user) {
   check(user, {email: String, role: String, name: String, lastName: String});
@@ -32,6 +32,7 @@ function updateUser(user) {
       'profile.name.last': user.lastName
     }
   });
+  Roles.setUserRoles(user.id, user.roles);
 }
 
 Meteor.methods({
