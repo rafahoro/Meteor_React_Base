@@ -1,4 +1,4 @@
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -23,6 +23,18 @@ function createNewUser(user) {
    */
 }
 
+function updateUser(user) {
+  check(user, Match.Any);
+  Meteor.users.update(user.id, {
+    $set: {
+      'emails.0.address': user.email,
+      'profile.name.first': user.firstName,
+      'profile.name.last': user.lastName
+    }
+  });
+}
+
 Meteor.methods({
-  createNewUser
+  createNewUser,
+  updateUser
 });

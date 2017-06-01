@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 import Loading from '../../components/Loading.jsx';
 
@@ -24,7 +25,7 @@ class Users extends Component {
           <tr key={idx}>
             <td>{idx + 1} </td>
             <td>
-              {user.profile.name.first}
+              <Link to={{ pathname: `/users/${user._id}` }}>{user.profile.name.first}</Link>
             </td>
             <td>{user.emails[0].address}</td>
           </tr>

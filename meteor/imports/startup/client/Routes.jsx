@@ -11,6 +11,7 @@ import Login from '../../ui/pages/Login.jsx';
 import Signup from '../../ui/pages/Signup.jsx';
 
 import Users from '../../ui/pages/Users/Users.jsx';
+import EditUser from '../../ui/pages/Users/EditUser.jsx';
 
 
 class Routes extends Component {
@@ -25,6 +26,7 @@ class Routes extends Component {
           <IndexRoute name="index" component={ Index }/>
           <Route name="login" path="/login" component={ Login }/>
           <Route name="users" path="/users" component={ Users }/>
+          <Route name="editUser" path="/users/:userId" component={ EditUser }/>
           <Route name="signup" path="/signup" component={ Signup }/>
           <Route path="*" component={ NotFound }/>
         </Route>
