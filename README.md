@@ -10,7 +10,8 @@ Currently implemented/packages:
 - accounts-password
 - eslint
 
-RoadMap:
--Tests
--check/validate
--Bootstrap? May be as a fork/branch?
+Next steps:
+- Tests
+- check/validate
+- i18n
+- Bootstrap? May be as a fork/branch?
